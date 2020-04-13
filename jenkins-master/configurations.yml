@@ -7,9 +7,9 @@ jenkins:
     enabled: false
 unclassified:
   location:
-    url: "${JENKINS_HOST}"
+    url: "http://localhost:8089"
   slackNotifier:
-    baseUrl: "${SLACK_URL}"
+    baseUrl: "https://test.enterprise.slack.com"
     tokenCredentialId: "slack-token"
 security:
   globalJobDslSecurityConfiguration:
@@ -21,32 +21,32 @@ credentials:
           - usernamePassword:
               scope: GLOBAL
               id: "github-token"
-              username: "${GITHUB_USERNAME}"
-              password: "${GITHUB_PASSWORD}"
+              username: "CHANGE_ME"
+              password: "CHANGE_ME"
               description: "GitHub Token"
           - string:
               scope: GLOBAL
               id: "slack-token"
-              secret: "${SLACK_TOKEN}"
+              secret: "CHANGE_ME"
 jobs:
   - script: >
-      freeStyleJob('JobDSL') {
-          displayName('JobDSL')
-          description('Create Jobs from this JobDSL')
+      freeStyleJob("seedjob") {
+          displayName("Seedjob")
+          description("Create Jobs from this seedjob")
 
           scm {
               git {
                   remote {
-                      github('${GITHUB_REPO_JOB_DSL}')
-                      credentials('github-token')
+                      github("http://localhost/testrepo.git")
+                      credentials("github-token")
                   }
               }
           }
 
           steps {
               dsl {
-                  removeAction('DISABLE')
-                  external('seed_jobdsl.groovy')
+                  removeAction("DISABLE")
+                  external("seed_jobdsl.groovy")
               }
           }
       }

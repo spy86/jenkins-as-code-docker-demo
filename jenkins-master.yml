@@ -1,0 +1,10 @@
+version: '3'
+services:
+  jenkin-master-node:
+    image: spy86/jenkins-master-node:latest
+    volumes:
+      - ./jenkins-master/configurations.yml:/var/jenkins_casc.yml
+      - /opt/jenkins_home:/var/jenkins_home
+    ports:
+      - "8089:8080"
+      - "50000:50000"
