@@ -22,12 +22,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
   sudo apt-get remove docker docker-engine docker.io containerd runc
   sudo apt-get update
-  sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+  sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   sudo apt-key fingerprint 0EBFCD88
   sudo add-apt-repository \
@@ -35,9 +30,9 @@ Vagrant.configure("2") do |config|
    $(lsb_release -cs) \
    stable"
   sudo apt-get update
-  sudo apt-get install docker-ce docker-ce-cli containerd.io
+  sudo apt-get install docker-ce docker-ce-cli containerd.io -y
   docker version
-  docker swarm init
+  docker swarm init --advertise-addr 192.168.123.123
   mkdir -p /opt/jenkins_home
   chown -R 1000:1000 /opt/jenkins_home
   docker stack deploy --compose-file=jenkins-master.yml jenkins
