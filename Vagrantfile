@@ -7,6 +7,7 @@
 # you're doing.
 Vagrant.configure("2") do |config|
   config.vm.box = "mmichal/ubuntu18_04"
+  config.vm.box_version = "1.1.20210331"
   # config.vm.box_check_update = false
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
@@ -15,7 +16,7 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
 
    config.vm.provider "virtualbox" do |vb|
-     vb.gui = true
+     vb.gui = false
      vb.memory = "1024"
    end
 
@@ -31,10 +32,14 @@ Vagrant.configure("2") do |config|
    stable"
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
+  sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
   docker version
   docker swarm init --advertise-addr 192.168.123.123
   mkdir -p /opt/jenkins_home
   chown -R 1000:1000 /opt/jenkins_home
-  docker stack deploy --compose-file=jenkins-master.yml jenkins
+  docker stack deploy --compose-file=/vagrant/jenkins-master.yml jenkins
+  docker service ls | grep jenkins 
   SHELL
 end
