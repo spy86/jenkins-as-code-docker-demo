@@ -1,11 +1,11 @@
 version: '3'
 services:
   jenkins-master-node:
-    image: spy86/jenkins-master-node:latest
+    image: spy86/docker-jenkins-controller-node:latest
     environment:
       CASC_JENKINS_CONFIG: /var/jenkins_casc.yml
     volumes:
-      - ./jenkins-master/configurations.yml:/var/jenkins_casc.yml
+      - ./jjenkins-controller/configurations.yml:/var/jenkins_casc.yml
       - /opt/jenkins_home:/var/jenkins_home
     ports:
       - "8089:8080"
