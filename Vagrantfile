@@ -36,10 +36,9 @@ Vagrant.configure("2") do |config|
   sudo chmod +x /usr/local/bin/docker-compose
   sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
   docker version
-  docker swarm init --advertise-addr 192.168.123.123
   mkdir -p /opt/jenkins_home
   chown -R 1000:1000 /opt/jenkins_home
-  docker stack deploy --compose-file=/vagrant/master.yml jenkins
+  docker-compose -f jenkins.yml up -d
   docker service ls | grep jenkins 
   SHELL
 end
