@@ -5,7 +5,7 @@ services:
     environment:
       CASC_JENKINS_CONFIG: /var/jenkins_casc.yml
     volumes:
-      - ./jjenkins-controller/configurations.yml:/var/jenkins_casc.yml
+      - ./jenkins-controller/configurations.yml:/var/jenkins_casc.yml
       - /opt/jenkins_home:/var/jenkins_home
     ports:
       - "8089:8080"
