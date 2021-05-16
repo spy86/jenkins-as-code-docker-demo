@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
   docker swarm init --advertise-addr 192.168.123.123
   mkdir -p /opt/jenkins_home
   chown -R 1000:1000 /opt/jenkins_home
-  docker stack deploy --compose-file=/vagrant/jenkins-master.yml jenkins
+  docker stack deploy --compose-file=/vagrant/master.yml jenkins
   docker service ls | grep jenkins 
   SHELL
 end
