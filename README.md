@@ -1,6 +1,8 @@
 # jenkins-as-code-docker-demo
-Demo Jenkins as code docker image
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Demo Jenkins as code docker image
 
 ## Prerequisites
 * Vagrant
